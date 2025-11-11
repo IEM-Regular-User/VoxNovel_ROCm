@@ -1,7 +1,9 @@
-FROM python:3.10-slim-buster
+FROM rocm/pytorch:2.3.0-rocm6.1
 
 # Set non-interactive installation to avoid timezone and other prompts
 ENV DEBIAN_FRONTEND=noninteractive
+ENV ROCM_PATH=/opt/rocm
+ENV HIP_VISIBLE_DEVICES=0
 
 # Install necessary packages including gcc, g++ and python3-dev for building extensions
 # Add cargo (Rust compiler) installation
@@ -36,7 +38,8 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 RUN pip install --upgrade pip
 RUN pip install bs4
 RUN pip install styletts2
-RUN pip install --no-cache-dir tts==0.21.3
+RUN pip install --no-cache-dir tts==0.21.3 # May build from CUDA wheels
+#RUN pip install git+https://github.com/coqui-ai/TTS.git # Coqui TTS (build from source for ROCm) Test if above fails
 RUN pip install booknlp==1.0.7.1
 # RUN pip install -r Ubuntu_requirements.txt --ignore me
 RUN pip install ebooklib
