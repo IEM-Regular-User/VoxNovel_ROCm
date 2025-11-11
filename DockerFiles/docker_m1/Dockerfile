@@ -1,4 +1,6 @@
-FROM rocm/pytorch:2.3.0-rocm6.1
+FROM rocm/pytorch:rocm7.1_ubuntu22.04_py3.10_pytorch_release_2.6.0
+# May need to lower pytorch version for compatability
+# Closest Version rocm6.2.2_ubuntu22.04_py3.10_pytorch_release_2.1.2
 
 # Set non-interactive installation to avoid timezone and other prompts
 ENV DEBIAN_FRONTEND=noninteractive
