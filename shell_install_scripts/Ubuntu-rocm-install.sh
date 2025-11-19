@@ -82,17 +82,8 @@ if [ "$(uname)" == "Linux" ]; then
     pip install -r Ubuntu_rocm_requirements.txt
     
     #Run test
-    python3 << 'EOF'
-    import torch
-    print("PyTorch version:", torch.__version__)
-    print("ROCm available:", torch.cuda.is_available())
-    if torch.cuda.is_available():
-        print("GPU:", torch.cuda.get_device_name(0))
-        x = torch.randn(3, 3).to('cuda')
-        print("Test successful! Tensor on:", x.device)
-    else:
-        print("ERROR: ROCm not available")
-    EOF
+    python3 -c "import torch; print('PyTorch', torch.__version__); print('ROCm available', torch.cuda.is_available()); \
+    import sys; sys.exit(0 if torch.cuda.is_available() else 1)"
     
     pip install ebooklib==0.18
     pip install epub2txt==0.1.6
