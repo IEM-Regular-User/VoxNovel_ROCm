@@ -82,7 +82,7 @@ if [ "$(uname)" == "Linux" ]; then
     pip install -r Ubuntu_rocm_requirements.txt
     
     #Run test
-    bashpython << 'EOF'
+    python3 << 'EOF'
     import torch
     print("PyTorch version:", torch.__version__)
     print("ROCm available:", torch.cuda.is_available())
