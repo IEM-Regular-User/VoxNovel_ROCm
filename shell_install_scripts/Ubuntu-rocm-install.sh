@@ -83,15 +83,15 @@ if [ "$(uname)" == "Linux" ]; then
     
     #Run test
     python3 << 'EOF'
-        import torch
-        print("PyTorch version:", torch.__version__)
-        print("ROCm available:", torch.cuda.is_available())
-        if torch.cuda.is_available():
-            print("GPU:", torch.cuda.get_device_name(0))
-            x = torch.randn(3, 3).to('cuda')
-            print("Test successful! Tensor on:", x.device)
-        else:
-            print("ERROR: ROCm not available")
+    import torch
+    print("PyTorch version:", torch.__version__)
+    print("ROCm available:", torch.cuda.is_available())
+    if torch.cuda.is_available():
+        print("GPU:", torch.cuda.get_device_name(0))
+        x = torch.randn(3, 3).to('cuda')
+        print("Test successful! Tensor on:", x.device)
+    else:
+        print("ERROR: ROCm not available")
     EOF
     
     pip install ebooklib==0.18
